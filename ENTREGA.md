@@ -1,6 +1,6 @@
 # Entrega — Grupo NN
 
-**Elementos:** nome (papel), nome (papel), nome (papel)
+**Elementos:** Diogo Barbosa (Autor), Diogo Pereira (Executor), Tiago Peixoto (Revisor)
 
 | # | Item | Onde |
 |---|------|------|

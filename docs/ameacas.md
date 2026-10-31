@@ -22,11 +22,11 @@ Formato: «Como atacante, quero *fazer X*, para *conseguir Y*.»
 | A-03 | [Manipular consultas com dados do pedido ou do token](ameacas/manipulacao-de-consultas.md) | `src/routes/encomendas.js`, `src/routes/utilizadores.js`, `src/db.js` | [PS-03 — Validação e consultas](politicas/PS-03-validacao-e-consultas.md) |
 | A-04 | [Reutilizar um token roubado](ameacas/token-roubado.md) | `src/autenticacao.js`, `src/routes/auth.js`, `src/config.js` | [PS-04 — Gestão de tokens](politicas/PS-04-gestao-de-tokens.md) |
 
-As quatro ameaças estão identificadas no código atual. Os documentos descrevem as correções e os critérios de aceitação; a implementação e os testes específicos continuam pendentes.
+As quatro ameaças estão identificadas no código atual. Os documentos descrevem as correções e os critérios de aceitação; a remoção do segredo fixo já foi implementada e testada, e as restantes correções e testes específicos continuam pendentes.
 
 ## Verificação
 
 - [Política geral](../SECURITY.md): regras e responsabilidades da equipa.
-- [Workflow de testes](../.github/workflows/testes.yml): executa `npm test`; atualmente existe apenas o teste de carregamento.
+- [Workflow de testes](../.github/workflows/testes.yml): executa `npm test`; inclui o carregamento e a configuração JWT; os testes das restantes regras continuam pendentes.
 - [Workflow de segurança](../.github/workflows/seguranca.yml): verifica dependências e segredos nos ficheiros atuais. Não substitui os testes das quatro regras nem verifica todo o histórico Git.
 - [Entrega](../ENTREGA.md): regista os links das execuções e dos PRs quando existirem.

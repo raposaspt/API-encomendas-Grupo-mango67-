@@ -33,7 +33,7 @@ Os testes de emissão, validação e revogação devem integrar `npm test`. A re
 
 ## Situação observada e limite da proteção
 
-Os tokens atuais são emitidos com validade de duas horas. O segredo está definido no código e não existe um mecanismo de revogação. A chamada de validação atual não declara uma lista de algoritmos nem verifica a existência da conta ou os claims exigidos por esta política.
+Os tokens atuais são emitidos com validade de duas horas e ainda não existe um mecanismo de revogação. O segredo passou a ser lido de `JWT_SECRET`, sem valor fixo, e o arranque com configuração ausente ou inválida é recusado e testado. A chamada de validação atual ainda não declara uma lista de algoritmos nem verifica a existência da conta ou os claims exigidos por esta política.
 
 Um token roubado que ainda seja válido pode ser reutilizado até expirar ou ser revogado. Validar a assinatura não distingue o titular legítimo de quem copiou esse token.
 

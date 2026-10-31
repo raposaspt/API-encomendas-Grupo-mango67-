@@ -23,7 +23,7 @@ Um token roubado pode funcionar até expirar ou ser revogado, mesmo com uma assi
 
 ## Verificação
 
-Os testes destas regras devem correr com `npm test` (`node --test`) e passar no [workflow de testes](.github/workflows/testes.yml) antes de integrar o PR. Atualmente, só existe um teste de carregamento; as quatro regras ainda precisam de implementação e testes próprios.
+Os testes destas regras devem correr com `npm test` (`node --test`) e passar no [workflow de testes](.github/workflows/testes.yml) antes de integrar o PR. Existem testes de carregamento e da configuração JWT. A leitura do segredo pelo ambiente está implementada; as quatro regras ainda precisam das restantes correções e dos testes funcionais correspondentes.
 
 O [workflow de segurança](.github/workflows/seguranca.yml) acrescenta duas verificações: `npm audit --omit=dev --audit-level=high` bloqueia dependências com vulnerabilidades altas ou críticas, e Gitleaks verifica os ficheiros atuais com `.gitleaks.toml`, ocultando os valores encontrados. A análise não cobre todo o histórico Git nem prova que as regras de autenticação e autorização estejam implementadas. Os achados devem ser corrigidos, sem tornar os passos opcionais para obter um resultado verde.
 

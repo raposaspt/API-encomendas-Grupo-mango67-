@@ -1,6 +1,6 @@
 # A-04 — Reutilizar um token roubado
 
-**Estado:** identificada; correção e testes específicos pendentes.
+**Estado:** identificada; segredo retirado do código, restantes correções e testes específicos pendentes.
 
 **Política associada:** [PS-04 — Gestão de tokens](../politicas/PS-04-gestao-de-tokens.md).
 
@@ -12,7 +12,7 @@ Como atacante, quero reutilizar o token de outro utilizador, para efetuar pedido
 
 [`src/routes/auth.js`](../../src/routes/auth.js) emite tokens com duração de duas horas. O middleware em [`src/autenticacao.js`](../../src/autenticacao.js) chama `jwt.verify`, mas não configura explicitamente a lista permitida de algoritmos nem verifica a existência do utilizador identificado por `sub`. Também não impõe a presença e a duração máxima dos campos `iat` e `exp`.
 
-Não existe um mecanismo de revogação. O segredo de assinatura está no código de [`src/config.js`](../../src/config.js), em vez de ser fornecido pelo ambiente. A verificação da assinatura não impede a reutilização de um token legítimo roubado.
+Não existe um mecanismo de revogação. O segredo de assinatura passou a ser fornecido por `JWT_SECRET` em [`src/config.js`](../../src/config.js), sem alternativa fixa; o arranque recusa valores ausentes, vazios ou com menos de 32 bytes. A verificação da assinatura não impede a reutilização de um token legítimo roubado.
 
 ## Impacto
 
@@ -21,7 +21,7 @@ Um token válido comprometido pode ser reutilizado até expirar ou ser revogado.
 ## Mitigação prevista
 
 - Aceitar apenas `HS256` e validar `sub`, `iat` e `exp`, incluindo a existência do utilizador e uma duração máxima de 15 minutos.
-- Fornecer o segredo por variável de ambiente, sem valor fixo ou alternativa conhecida no repositório.
+- Manter o segredo numa variável de ambiente e substituir em todas as instalações a chave que estava exposta; a leitura por `JWT_SECRET` já está implementada.
 - Permitir revogar sessões comprometidas e verificar essa revogação nas rotas protegidas.
 - Usar HTTPS em produção e excluir tokens e cabeçalhos de autorização dos logs.
 
@@ -33,4 +33,4 @@ Um token válido comprometido pode ser reutilizado até expirar ou ser revogado.
 4. Depois da revogação, o mesmo token deixa de permitir pedidos protegidos.
 5. A revisão confirma o segredo fora do código, o HTTPS no ambiente de produção e a ausência de tokens nos logs.
 
-Os testes automatizados devem integrar `npm test`; configuração, transporte e logs precisam também de revisão no ambiente correspondente. Estas verificações ainda estão pendentes. Ver a [política geral](../../SECURITY.md).
+Os testes automatizados devem integrar `npm test`; configuração, transporte e logs precisam também de revisão no ambiente correspondente. O arranque com e sem uma chave válida é verificado em [test/config.test.js](../../test/config.test.js); as restantes verificações continuam pendentes. Ver a [política geral](../../SECURITY.md).

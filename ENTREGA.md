@@ -8,7 +8,7 @@
 | 2 | Política geral | [SECURITY.md](SECURITY.md) |
 | 3 | Pipeline de segurança | [.github/workflows/seguranca.yml](.github/workflows/seguranca.yml) |
 | 4 | Execução **VERMELHA** | [Execução com falhas de dependências e segredo](https://github.com/raposaspt/API-encomendas-Grupo-mango67-/actions/runs/41195134931) |
-| 5 | Execução **VERDE** | Pendente — preencher depois das correções e de uma execução real sem falhas. |
+| 5 | Execução **VERDE** | [Segurança aprovada](https://github.com/raposaspt/API-encomendas-Grupo-mango67-/actions/runs/41196073227) · [Testes aprovados](https://github.com/raposaspt/API-encomendas-Grupo-mango67-/actions/runs/41196073135) |
 | 6 | PR que abrimos noutro grupo | Pendente — indicar o grupo e o URL do PR real. |
 | 7 | PR que revimos | Pendente — indicar o URL do PR real. |
 

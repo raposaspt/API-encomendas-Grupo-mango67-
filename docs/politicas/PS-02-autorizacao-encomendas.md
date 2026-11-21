@@ -28,6 +28,10 @@ Aplica-se a `GET /encomendas` e `GET /encomendas/:id`, em [src/routes/encomendas
 
 Os testes devem usar duas contas e encomendas de ambas, comparar as respostas de `404` e integrar `npm test`.
 
+## Verificação automática
+
+O job **PS-02 — Autorização de encomendas** em [`.github/workflows/seguranca.yml`](../../.github/workflows/seguranca.yml) executa `npm test -- --test-name-pattern="PS-02"`. Os testes em [`test/policies/ps-02.test.js`](../../test/policies/ps-02.test.js) comparam a resposta para encomendas alheias e inexistentes e confirmam que a listagem só devolve encomendas do utilizador autenticado. O job deve passar antes de integrar alterações.
+
 ## Situação observada
 
 A consulta individual atual seleciona a encomenda pelo ID e devolve-a sem verificar o proprietário. A listagem aplica um filtro em memória por `utilizadorId`; esse filtro não protege a rota individual. Ainda não existem testes próprios destes limites de acesso.

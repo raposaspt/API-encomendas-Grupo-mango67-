@@ -30,6 +30,10 @@ Detalha a regra 3 da [política geral](../../SECURITY.md) e responde à ameaça 
 
 Os testes devem observar as chamadas à camada de dados, incluindo a sua ausência nos casos inválidos, e integrar `npm test`.
 
+## Verificação automática
+
+O job **PS-03 — Validação e consultas** em [`.github/workflows/seguranca.yml`](../../.github/workflows/seguranca.yml) executa `npm test -- --test-name-pattern="PS-03"`. Os testes em [`test/policies/ps-03.test.js`](../../test/policies/ps-03.test.js) verificam a rejeição de `1abc` e `1 OR 1=1` antes de consultar os dados e exigem que um ID válido seja enviado como parâmetro separado do SQL. O job deve passar antes de integrar alterações.
+
 ## Situação observada
 
 As rotas atuais concatenam o ID do pedido ou interpolam `sub` no SQL. A função `query()` simula consultas sobre dados em memória e interpreta texto com uma expressão regular; não executa um motor SQL real. Este exercício evidencia a construção insegura e a falta de validação, sem demonstrar a execução de uma injeção SQL numa base real.

@@ -56,3 +56,75 @@ jobs:
         run: |
           "${RUNNER_TEMP}/gitleaks-8.30.1/gitleaks" dir \
             --config=.gitleaks.toml --redact=100 --exit-code=1 .
+
+  ps01_autenticacao:
+    name: PS-01 — Autenticação
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obter o codigo
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Preparar Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+      - name: Instalar as versoes do lock sem scripts
+        run: npm ci --ignore-scripts --no-audit
+      - name: Verificar a PS-01
+        run: npm test -- --test-name-pattern="PS-01"
+
+  ps02_autorizacao:
+    name: PS-02 — Autorização de encomendas
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obter o codigo
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Preparar Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+      - name: Instalar as versoes do lock sem scripts
+        run: npm ci --ignore-scripts --no-audit
+      - name: Verificar a PS-02
+        run: npm test -- --test-name-pattern="PS-02"
+
+  ps03_validacao:
+    name: PS-03 — Validação e consultas
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obter o codigo
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Preparar Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+      - name: Instalar as versoes do lock sem scripts
+        run: npm ci --ignore-scripts --no-audit
+      - name: Verificar a PS-03
+        run: npm test -- --test-name-pattern="PS-03"
+
+  ps04_tokens:
+    name: PS-04 — Gestão de tokens
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obter o codigo
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Preparar Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+      - name: Instalar as versoes do lock sem scripts
+        run: npm ci --ignore-scripts --no-audit
+      - name: Verificar a PS-04 e o segredo de configuração
+        run: npm test -- --test-name-pattern="PS-04|JWT_SECRET"

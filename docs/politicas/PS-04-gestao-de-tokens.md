@@ -31,6 +31,10 @@ Aplica-se à emissão em [src/routes/auth.js](../../src/routes/auth.js), à vali
 
 Os testes de emissão, validação e revogação devem integrar `npm test`. A revisão deve também confirmar a origem do segredo, a configuração HTTPS do ambiente de produção e a ausência de tokens nos logs; o teste de carregamento não comprova estes requisitos operacionais.
 
+## Verificação automática
+
+O job **PS-04 — Gestão de tokens** em [`.github/workflows/seguranca.yml`](../../.github/workflows/seguranca.yml) executa `npm test -- --test-name-pattern="PS-04|JWT_SECRET"`. Os testes em [`test/policies/ps-04.test.js`](../../test/policies/ps-04.test.js) verificam o algoritmo, os claims, a duração, o `iat` e a existência do utilizador; os testes em [`test/config.test.js`](../../test/config.test.js) verificam a configuração do segredo. A revogação, o prazo dos tokens emitidos, o HTTPS e os logs continuam a exigir revisão até existir um mecanismo de sessão testável.
+
 ## Situação observada e limite da proteção
 
 Os tokens atuais são emitidos com validade de duas horas e ainda não existe um mecanismo de revogação. O segredo passou a ser lido de `JWT_SECRET`, sem valor fixo, e o arranque com configuração ausente ou inválida é recusado e testado. A chamada de validação atual ainda não declara uma lista de algoritmos nem verifica a existência da conta ou os claims exigidos por esta política.

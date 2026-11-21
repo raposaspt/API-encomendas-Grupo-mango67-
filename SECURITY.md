@@ -23,9 +23,9 @@ Um token roubado pode funcionar até expirar ou ser revogado, mesmo com uma assi
 
 ## Verificação
 
-Os testes destas regras devem correr com `npm test` (`node --test`) e passar no [workflow de testes](.github/workflows/testes.yml) antes de integrar o PR. Existem testes de carregamento e da configuração JWT. A leitura do segredo pelo ambiente está implementada; as quatro regras ainda precisam das restantes correções e dos testes funcionais correspondentes.
+Os testes destas regras correm com `npm test` (`node --test`) no [workflow de testes](.github/workflows/testes.yml). O [workflow de segurança](.github/workflows/seguranca.yml) tem um job por política: **PS-01 — Autenticação**, **PS-02 — Autorização de encomendas**, **PS-03 — Validação e consultas** e **PS-04 — Gestão de tokens**. Cada job seleciona os testes da política pelo respetivo nome. Os testes de regressão registam os comportamentos herdados que ainda não cumprem as políticas; os jobs devem passar antes de integrar as correções.
 
-O [workflow de segurança](.github/workflows/seguranca.yml) acrescenta duas verificações: `npm audit --omit=dev --audit-level=high` bloqueia dependências com vulnerabilidades altas ou críticas, e Gitleaks verifica os ficheiros atuais com `.gitleaks.toml`, ocultando os valores encontrados. A análise não cobre todo o histórico Git nem prova que as regras de autenticação e autorização estejam implementadas. Os achados devem ser corrigidos, sem tornar os passos opcionais para obter um resultado verde.
+O workflow de segurança também executa `npm audit --omit=dev --audit-level=high`, que bloqueia dependências com vulnerabilidades altas ou críticas, e Gitleaks, que verifica os ficheiros atuais com `.gitleaks.toml` e oculta os valores encontrados. A análise não cobre todo o histórico Git. A verificação da revogação, do HTTPS e dos logs continua sujeita à revisão descrita na PS-04.
 
 ## Políticas detalhadas
 

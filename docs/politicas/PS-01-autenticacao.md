@@ -26,6 +26,10 @@ Aplica-se a `POST /auth/login`, em [src/routes/auth.js](../../src/routes/auth.js
 
 Os testes devem usar contas de teste com hashes válidos e comparar o código HTTP e o corpo das respostas rejeitadas. Devem integrar `npm test` antes de considerar a regra implementada.
 
+## Verificação automática
+
+O job **PS-01 — Autenticação** em [`.github/workflows/seguranca.yml`](../../.github/workflows/seguranca.yml) executa `npm test -- --test-name-pattern="PS-01"`. Os testes em [`test/policies/ps-01.test.js`](../../test/policies/ps-01.test.js) verificam a rejeição de logins sem palavra-passe e a resposta genérica para email inexistente ou palavra-passe errada. O job deve passar antes de integrar alterações. A emissão após uma palavra-passe válida e a comparação com um hash ainda exigem uma conta de teste com hash real.
+
 ## Situação observada
 
 A rota atual procura a conta pelo email e emite o token sem verificar uma palavra-passe. Os hashes do conjunto de dados em memória são exemplos fictícios. O teste de carregamento existente não demonstra o cumprimento desta política.

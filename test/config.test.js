@@ -72,7 +72,7 @@ for (const { name, value } of invalidSecrets) {
   });
 }
 
-test("a aplicação responde à saúde com um segredo configurado sem o divulgar", () => {
+test("PS-04: aplicação responde à saúde com um segredo configurado sem o divulgar", () => {
   const secret = randomBytes(32).toString("base64");
 
   const result = runApplication(secret);

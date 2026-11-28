@@ -25,7 +25,7 @@ Um token roubado pode funcionar até expirar ou ser revogado, mesmo com uma assi
 
 Os testes destas regras correm com `npm test` (`node --test`) no [workflow de testes](.github/workflows/testes.yml). O [workflow de segurança](.github/workflows/seguranca.yml) tem um job por política: **PS-01 — Autenticação**, **PS-02 — Autorização de encomendas**, **PS-03 — Validação e consultas** e **PS-04 — Gestão de tokens**. Cada job seleciona os testes da política pelo respetivo nome. Os testes de regressão registam os comportamentos herdados que ainda não cumprem as políticas; os jobs devem passar antes de integrar as correções.
 
-O workflow de segurança também executa `npm audit --omit=dev --audit-level=high`, que bloqueia dependências com vulnerabilidades altas ou críticas, e Gitleaks, que verifica os ficheiros atuais com `.gitleaks.toml` e oculta os valores encontrados. A análise não cobre todo o histórico Git. A verificação da revogação, do HTTPS e dos logs continua sujeita à revisão descrita na PS-04.
+O workflow de segurança acrescenta Gitleaks, que verifica o histórico Git completo com `.gitleaks.toml` e oculta os valores encontrados, e Semgrep, que assinala consultas SQL construídas por concatenação ou interpolação. O grupo ainda não definiu uma política sobre dependências; por isso, o job A2 do catálogo não foi incluído. Estas ferramentas não provam que as regras de autenticação e autorização estejam implementadas, nem substituem a revisão operacional indicada na PS-04.
 
 ## Políticas detalhadas
 

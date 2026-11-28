@@ -32,7 +32,7 @@ Os testes devem observar as chamadas à camada de dados, incluindo a sua ausênc
 
 ## Verificação automática
 
-O job **PS-03 — Validação e consultas** em [`.github/workflows/seguranca.yml`](../../.github/workflows/seguranca.yml) executa `npm test -- --test-name-pattern="PS-03"`. Os testes em [`test/policies/ps-03.test.js`](../../test/policies/ps-03.test.js) verificam a rejeição de `1abc` e `1 OR 1=1` antes de consultar os dados e exigem que um ID válido seja enviado como parâmetro separado do SQL. O job deve passar antes de integrar alterações.
+O job **PS-03 — Validação e consultas** em [`.github/workflows/seguranca.yml`](../../.github/workflows/seguranca.yml) executa `npm test -- --test-name-pattern="PS-03"`. Os testes em [`test/policies/ps-03.test.js`](../../test/policies/ps-03.test.js) verificam a rejeição de `1abc` e `1 OR 1=1` antes de consultar os dados e exigem que um ID válido seja enviado como parâmetro separado do SQL. O job **PS-03 — Análise estática das consultas** aplica a regra [`.semgrep/regras.yml`](../../.semgrep/regras.yml) ao código em `src/` e deteta concatenação ou interpolação de valores em consultas SQL. Ambos devem passar antes de integrar alterações.
 
 ## Situação observada
 

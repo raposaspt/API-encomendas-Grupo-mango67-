@@ -44,6 +44,6 @@ npm.cmd audit --omit=dev --audit-level=high
 
 Os testes geram chaves efémeras, sem precisar de credenciais reais ou de uma chave guardada no GitHub. Incluem o arranque da API com configuração válida e a recusa de segredos ausentes ou inválidos.
 
-O [workflow de testes](.github/workflows/testes.yml) executa os testes, e o [workflow de segurança](.github/workflows/seguranca.yml) verifica dependências e segredos nos ficheiros atuais. Os parâmetros de bloqueio mantêm-se ativos.
+O [workflow de testes](.github/workflows/testes.yml) executa os testes, e o [workflow de segurança](.github/workflows/seguranca.yml) verifica segredos em todo o histórico Git, aplica a regra Semgrep da PS-03 às consultas SQL e executa os testes das quatro políticas.
 
 A remoção do segredo fixo e a atualização das dependências corrigem os dois bloqueios do pipeline. As restantes regras de autenticação, autorização, validação de IDs e gestão de tokens descritas em [SECURITY.md](SECURITY.md) continuam a exigir implementação e testes próprios.

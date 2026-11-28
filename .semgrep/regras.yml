@@ -1,0 +1,13 @@
+# Regra A3 do catálogo, aplicada à PS-03 do grupo mango67.
+# Os dois padrões detetam as duas formas inseguras usadas no projeto.
+rules:
+  - id: sql-por-concatenacao
+    languages: [javascript]
+    severity: ERROR
+    message: >-
+      Consulta SQL construída por concatenação ou interpolação de strings.
+      Usar consulta parametrizada.
+    patterns:
+      - pattern-either:
+          - pattern: '$DB.query("..." + $X, ...)'
+          - pattern: '$DB.query(`...${$X}...`, ...)'

@@ -28,5 +28,5 @@ As quatro ameaças estão identificadas no código atual. Os documentos descreve
 
 - [Política geral](../SECURITY.md): regras e responsabilidades da equipa.
 - [Workflow de testes](../.github/workflows/testes.yml): executa `npm test`, incluindo os testes de regressão das políticas.
-- [Workflow de segurança](../.github/workflows/seguranca.yml): executa um job de verificação por política, além da análise de dependências e segredos nos ficheiros atuais. Não verifica todo o histórico Git nem substitui a revisão operacional da PS-04.
+- [Workflow de segurança](../.github/workflows/seguranca.yml): executa um job de teste por política, análise estática das consultas SQL e Gitleaks no histórico Git completo. Os valores encontrados são ocultados; a verificação não substitui a revisão operacional da PS-04.
 - [Entrega](../ENTREGA.md): regista os links das execuções e dos PRs quando existirem.

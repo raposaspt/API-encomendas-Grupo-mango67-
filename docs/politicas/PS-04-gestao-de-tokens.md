@@ -33,7 +33,7 @@ Os testes de emissão, validação e revogação devem integrar `npm test`. A re
 
 ## Verificação automática
 
-O job **PS-04 — Gestão de tokens** em [`.github/workflows/seguranca.yml`](../../.github/workflows/seguranca.yml) executa `npm test -- --test-name-pattern="PS-04|JWT_SECRET"`. Os testes em [`test/policies/ps-04.test.js`](../../test/policies/ps-04.test.js) verificam o algoritmo, os claims, a duração, o `iat` e a existência do utilizador; os testes em [`test/config.test.js`](../../test/config.test.js) verificam a configuração do segredo. A revogação, o prazo dos tokens emitidos, o HTTPS e os logs continuam a exigir revisão até existir um mecanismo de sessão testável.
+O job **PS-04 — Gestão de tokens** em [`.github/workflows/seguranca.yml`](../../.github/workflows/seguranca.yml) executa `npm test -- --test-name-pattern="PS-04|JWT_SECRET"`. Os testes em [`test/policies/ps-04.test.js`](../../test/policies/ps-04.test.js) verificam o algoritmo, os claims, a duração, o `iat` e a existência do utilizador; os testes em [`test/config.test.js`](../../test/config.test.js) verificam a configuração do segredo. O job **Segredos no histórico Git** executa Gitleaks com `.gitleaks.toml` e redação dos achados. A revogação, o prazo dos tokens emitidos, o HTTPS e os logs continuam a exigir revisão até existir um mecanismo de sessão testável.
 
 ## Situação observada e limite da proteção
 
